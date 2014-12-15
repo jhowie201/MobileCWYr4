@@ -1,4 +1,4 @@
-package com.example.james.gamingnews;
+package com.example.james.gamingnews.UserPreferences;
 
 import android.app.Activity;
 import android.content.SharedPreferences;

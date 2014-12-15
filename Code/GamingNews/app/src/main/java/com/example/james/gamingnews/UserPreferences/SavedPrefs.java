@@ -1,4 +1,4 @@
-package com.example.james.gamingnews;
+package com.example.james.gamingnews.UserPreferences;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.james.gamingnews.R;
 
 /**
  * Created by James on 13/12/2014.

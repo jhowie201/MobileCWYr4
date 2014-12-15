@@ -1,6 +1,6 @@
-package com.example.james.gamingnews;
+package com.example.james.gamingnews.mainactivities;
 
-import android.app.Activity;
+import android.app.ActivityGroup;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -15,10 +15,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TabHost;
 
-import java.util.concurrent.ExecutionException;
+import com.example.james.gamingnews.AboutDialogue.AboutDialogue;
+import com.example.james.gamingnews.R;
+import com.example.james.gamingnews.UserPreferences.SavedPreferences;
+import com.example.james.gamingnews.UserPreferences.SavedPrefs;
 
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener{
+public class MainActivity extends ActivityGroup implements View.OnClickListener{
 
 
     FragmentManager fmAboutDialogue;
@@ -26,37 +29,34 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     SharedPreferences SharedPref;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
-        tabHost.setup();
+
+        TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
+        tabHost.setup(this.getLocalActivityManager());
 
         TabHost.TabSpec spec1 =tabHost.newTabSpec("News");
-        spec1.setContent(R.id.tab1);
         spec1.setIndicator("News");
+        Intent GNIntent = new Intent(this,GamingNews.class);
+
+         //spec1.setContent(R.id.tab1);
+        //Intent GNIntent = new Intent(this,GamingNews.class);
+        spec1.setContent(GNIntent);
 
 
         TabHost.TabSpec spec2 =tabHost.newTabSpec("Reviews");
         spec2.setIndicator("Reviews");
-        spec2.setContent(R.id.tab2);
+        Intent GRIntent = new Intent(this,GamingReviews.class);
+      // spec2.setContent(R.id.tab2);
+        //Intent GRIntent = new Intent(this,GamingReviews.class);
+        spec2.setContent(GRIntent);
 
         tabHost.addTab(spec1);
         tabHost.addTab(spec2);
-
-       // RSSDataItem userHoroscope = new RSSDataItem();
-         //String RSSFeedURL = "http://www.gamespot.com/feeds/news"; //+ starSignInfo.getStarSign();
-         //  AsyncRSSParser rssAsyncParse = new AsyncRSSParser(this,RSSFeedURL);
-
-        // try {
-        //  userHoroscope = rssAsyncParse.execute("").get();
-        //  }catch (InterruptedException e){
-       //  e.printStackTrace();
-      //  }catch (ExecutionException e){
-          //   e.printStackTrace();
-       //   }
 
 
         SharedPref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         SDPrefs.setDefaultPrefs();
 
         fmAboutDialogue = this.getFragmentManager();
-        Log.e("n", "message");
+        Log.e("n", "MainActivity RUN");
     }
 
 
@@ -98,8 +98,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     }
     public void onClick (View view){
-        Intent myIntent = new Intent(MainActivity.this, SavedPrefs.class);
-        MainActivity.this.startActivity(myIntent);
+
+         finish();
+
 
     }
 }

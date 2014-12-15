@@ -1,10 +1,24 @@
-package com.example.james.gamingnews;
+package com.example.james.gamingnews.SplashScreen;
 //<!--James Howie S1310206-->
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Window;
+
+import com.example.james.gamingnews.Data.RSSDataItem;
+import com.example.james.gamingnews.Data.RSSHandler;
+import com.example.james.gamingnews.mainactivities.MainActivity;
+import com.example.james.gamingnews.R;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
+
+import java.net.URL;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 public class SplashScreen extends Activity {
     private Intent myintent;
@@ -32,4 +46,6 @@ public class SplashScreen extends Activity {
         }).start();
     }
 
-}
+
+
+    }

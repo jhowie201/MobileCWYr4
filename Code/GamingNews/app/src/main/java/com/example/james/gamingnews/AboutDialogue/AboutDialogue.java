@@ -1,4 +1,4 @@
-package com.example.james.gamingnews;
+package com.example.james.gamingnews.AboutDialogue;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+
+import com.example.james.gamingnews.R;
 
 /**
  * Created by James on 13/12/2014.

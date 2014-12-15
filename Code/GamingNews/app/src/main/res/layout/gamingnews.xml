@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+    <EditText
+        android:id="@+id/TitleSearch"
+        android:layout_width="279dp"
+        android:layout_height="65dp"
+        android:ems="10"
+        android:hint="Search....."
+        android:inputType="textVisiblePassword"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-</LinearLayout>
+    </EditText>
+
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/refresh"
+        android:layout_gravity="right"
+        android:layout_below="@+id/TitleSearch"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:id="@+id/listView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:scrollingCache="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/refresh">
+
+    </ListView>
+
+</RelativeLayout>
