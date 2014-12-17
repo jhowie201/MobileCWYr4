@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="First Name"
+        android:id="@+id/FnameInput"
+        android:layout_row="5"
+        android:layout_column="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Last Name"
+        android:id="@+id/LnameInput"
+        android:layout_row="7"
+        android:layout_column="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EmailInput"
+        android:hint="Email"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="8"
+        android:layout_column="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:id="@+id/PasswordInput"
+        android:layout_row="9"
+        android:layout_column="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:id="@+id/UsernameInput"
+        android:layout_row="10"
+        android:layout_column="1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="79dp"
+        android:text="Sign Up"
+        android:id="@+id/button"
+        android:onClick="SignUp"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="12"
+        android:layout_column="1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Return To Login"
+        android:id="@+id/button6"
+        android:layout_row="11"
+        android:layout_column="1"
+        android:onClick="returnToLogIn"
+        android:layout_gravity="center_horizontal" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_gravity="right" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textView3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verifiy User"
+        android:id="@+id/button7"
+        android:onClick="lookupUser"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText" />
+
+</LinearLayout>

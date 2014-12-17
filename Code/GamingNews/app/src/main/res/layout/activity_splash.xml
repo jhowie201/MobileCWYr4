@@ -9,8 +9,9 @@
         android:id="@+id/imgLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:src="@drawable/gaming" />
+        android:src="@drawable/gaming"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true" />
  
     <TextView
         android:layout_width="fill_parent"
@@ -26,7 +27,7 @@
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/imgLogo"
         android:layout_centerHorizontal="true" />
  
 </RelativeLayout>

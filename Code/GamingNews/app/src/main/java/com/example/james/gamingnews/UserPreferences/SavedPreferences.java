@@ -1,8 +1,13 @@
 package com.example.james.gamingnews.UserPreferences;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.view.View;
+
+import com.example.james.gamingnews.mainactivities.AppMaps;
+import com.example.james.gamingnews.mainactivities.MainActivity;
 
 /**
  * Created by James on 13/12/2014.
@@ -12,7 +17,7 @@ public class SavedPreferences extends Activity {
     SharedPreferences SharedPref;
     private String UserName;
     private String Email;
-    private String Search;
+
 
     // *********************************************
     // Declare getters and setters etc.
@@ -34,15 +39,7 @@ public class SavedPreferences extends Activity {
     {
         return Email;
     }
-    private void setSearch(String isSearch)
-    {
-        this.Search = isSearch;
-    }
 
-    public String getSearch()
-    {
-        return Search;
-    }
 
     // **************************************************
     // Declare constructor and date manipulation methods.
@@ -52,23 +49,23 @@ public class SavedPreferences extends Activity {
 
         setUserName("Guest");
         setEmail("Null");
-        setSearch("No Search");
+
         try {
             this.SharedPref = SDPrefs;
         }
         catch (Exception e)
         {
-            Log.e("n", "Pref Manager is NULL");
+            Log.e("n", "Preferences is null");
         }
         setDefaultPrefs();
     }
 
-    public void savePreferences(String key, boolean value) {
-        SharedPreferences.Editor editor = SharedPref.edit();
+  //  public void savePreferences(String key, boolean value) {
+      //  SharedPreferences.Editor editor = SharedPref.edit();
 
-        editor.putBoolean(key, value);
-        editor.commit();
-    }
+     //   editor.putBoolean(key, value);
+     //   editor.commit();
+   // }
 
     public void savePreferences(String key, String value) {
         SharedPreferences.Editor editor = SharedPref.edit();
@@ -76,17 +73,21 @@ public class SavedPreferences extends Activity {
         editor.commit();
     }
 
-    public void savePreferences(String key, int value) {
-        SharedPreferences.Editor editor = SharedPref.edit();
-        editor.putInt(key, value);
-        editor.commit();
-    }
+   // public void savePreferences(String key, int value) {
+        //SharedPreferences.Editor editor = SharedPref.edit();
+       // editor.putInt(key, value);
+       // editor.commit();
+   // }
 
     public void setDefaultPrefs(){
         savePreferences("UserName", "Guest");
         savePreferences("Email", "Null");
-        savePreferences("Search", "No Search");
+     ;
 
     }
+
+
+
+
 }
 

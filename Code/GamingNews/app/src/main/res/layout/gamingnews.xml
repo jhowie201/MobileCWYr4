@@ -10,10 +10,11 @@
         android:ems="10"
         android:hint="Search....."
         android:inputType="textVisiblePassword"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/textView9"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
     </EditText>
 
@@ -25,7 +26,9 @@
         android:layout_gravity="right"
         android:layout_below="@+id/TitleSearch"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <ListView
         android:id="@+id/listView3"
@@ -38,5 +41,14 @@
         android:layout_below="@+id/refresh">
 
     </ListView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="NEWS"
+        android:id="@+id/textView9"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

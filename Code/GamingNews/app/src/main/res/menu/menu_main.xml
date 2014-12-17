@@ -4,6 +4,12 @@
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
     <item
+        android:id="@+id/DrawToCanvas"
+        android:icon="@drawable/ic_action_cancel"
+        android:title="Drawing to Canvas Circle"
+        app:showAsAction="ifRoom"
+        />
+    <item
         android:id="@+id/About"
         android:icon="@drawable/ic_action_cancel"
         android:title="About"
@@ -13,4 +19,8 @@
         android:icon="@drawable/ic_action_cancel"
         android:title="Saved"
         />
+    <item
+        android:id="@+id/Login"
+        android:icon="@drawable/ic_action_cancel"
+        android:title="Login"/>
 </menu>

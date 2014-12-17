@@ -17,18 +17,12 @@
         android:text="Email: "
         android:id="@+id/txtEmail" />
 
-    <TextView
-        android:layout_width="294dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="LastSearched: "
-        android:id="@+id/txtSearch" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Return to Reviews"
-        android:onClick="activity_main"
+        android:text="Return to Main Menu"
+        android:onClick="GoToMain"
         android:id="@+id/btnBack"
 
 

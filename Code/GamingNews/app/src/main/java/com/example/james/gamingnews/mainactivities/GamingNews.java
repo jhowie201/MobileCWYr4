@@ -5,9 +5,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,7 +35,7 @@ import javax.xml.parsers.SAXParserFactory;
 /**
  * Created by James on 13/12/2014.
  */
-public class GamingNews extends Activity {
+public class GamingNews extends ActionBarActivity {
     EditText inputSearch;
     Button refresh;
     int count;
@@ -104,6 +107,12 @@ public class GamingNews extends Activity {
 
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
 
 
