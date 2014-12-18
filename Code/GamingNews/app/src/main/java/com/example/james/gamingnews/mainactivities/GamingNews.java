@@ -1,7 +1,10 @@
 package com.example.james.gamingnews.mainactivities;
 
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -11,6 +14,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,11 +22,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.james.gamingnews.AboutDialogue.AboutDialogue;
+import com.example.james.gamingnews.CircDrawing;
 import com.example.james.gamingnews.Data.RSSDataItem;
 import com.example.james.gamingnews.Data.RSSHandler;
 import com.example.james.gamingnews.Data.RSSReader;
 import com.example.james.gamingnews.Listeners.ListenerGN;
+import com.example.james.gamingnews.Login.LoginScreen;
 import com.example.james.gamingnews.R;
+import com.example.james.gamingnews.UserPreferences.SavedPrefs;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -39,11 +47,13 @@ public class GamingNews extends ActionBarActivity {
     EditText inputSearch;
     Button refresh;
     int count;
+    FragmentManager fmAboutDialogue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gamingnews);
+        fmAboutDialogue = this.getFragmentManager();
         try {
            RSSFeed();
             Log.e("n", "RSSFeed First RUN");
@@ -112,6 +122,36 @@ public class GamingNews extends ActionBarActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) {
+            case R.id.DrawToCanvas:
+                Intent DTC = new Intent (this,CircDrawing.class);
+                this.startActivity(DTC);
+                return true;
+            case R.id.Login:
+                Intent intent = new Intent (this,LoginScreen.class);
+                this.startActivity(intent);
+                return true;
+            case R.id.About:
+                DialogFragment AboutDlg = new AboutDialogue();
+                AboutDlg.show(fmAboutDialogue, "About_Dlg");
+                return true;
+            case R.id.Saved:
+                Intent intent2 = new Intent(this, SavedPrefs.class);
+                this.startActivity(intent2);
+                // setContentView(R.layout.savedprefs);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
 

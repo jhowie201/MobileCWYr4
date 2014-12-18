@@ -1,5 +1,6 @@
 package com.example.james.gamingnews.mainactivities;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -23,13 +24,11 @@ import com.example.james.gamingnews.UserPreferences.SavedPrefs;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
-
-    FragmentManager fmAboutDialogue;
     SavedPreferences SDPrefs;
     SharedPreferences SharedPref;
+    FragmentManager fmAboutDialogue;
+
     //TextView LoggedInUser;
-
-
 
 
     @Override
@@ -51,11 +50,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         this.startActivity(News);
     }
 
-    public void GoToMaps (View view){
+   // public void GoToMaps (View view){
 
-        Intent Mp = new Intent(this, AppMaps.class);
-        this.startActivity(Mp);
-    }
+      //  Intent Mp = new Intent(this, AppMaps.class);
+      //  this.startActivity(Mp);
+  //  }
 
 
 
@@ -97,7 +96,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     }
     public void onClick (View view){
-
+        setResult(Activity.RESULT_OK);
          finish();
 
 

@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.example.james.gamingnews.DBHandler;
 import com.example.james.gamingnews.DBUserSETGET;
 import com.example.james.gamingnews.R;
+import com.example.james.gamingnews.UserInfo;
+import com.example.james.gamingnews.UserInfoDBMgr;
 
 /**
  * Created by James on 16/12/2014.
@@ -46,7 +48,7 @@ public class SignUp extends ActionBarActivity {
 
 
     public void SignUp (View view) {
-        DBHandler dbHandler = new DBHandler(this, null, null, 1);
+        UserInfoDBMgr dbHandler = new UserInfoDBMgr(this, null, null, 1);
 
 
 
@@ -56,9 +58,9 @@ public class SignUp extends ActionBarActivity {
         String Password = PasswordInput.getText().toString();
         String UserName = UsernameInput.getText().toString();
 
-        DBUserSETGET DBUsersetget = new DBUserSETGET(UserID,FirstName,LastName,Email,Password,UserName);
+        UserInfo userinfo = new UserInfo();
 
-        dbHandler.addUserInfo(DBUsersetget);
+        dbHandler.addUserInfo(userinfo);
 
         FirstnameInput.setText("");
         LastnameInput.setText("");
@@ -71,9 +73,9 @@ public class SignUp extends ActionBarActivity {
     }
 
     public void lookupUser (View view) {
-        DBHandler dbHandler = new DBHandler(this, null, null, 1);
+        UserInfoDBMgr dbHandler = new UserInfoDBMgr(this, null, null, 1);
 
-        DBUserSETGET DBUsersetget = dbHandler.findUserInfo(VerifyUser.getText().toString());
+        UserInfo DBUsersetget = dbHandler.findUserInfo(VerifyUser.getText().toString());
 
         if (DBUsersetget != null) {
             DBUserName.setText(String.valueOf(DBUsersetget.getUserName()));

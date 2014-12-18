@@ -7,9 +7,11 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.james.gamingnews.R;
@@ -18,11 +20,14 @@ import com.example.james.gamingnews.mainactivities.MainActivity;
 /**
  * Created by James on 13/12/2014.
  */
-public class SavedPrefs extends Activity implements View.OnClickListener{
-    SharedPreferences SharedPref;
+public class SavedPrefs extends ActionBarActivity implements View.OnClickListener{
 
-    TextView txtUserName;
-    TextView txtEmail;
+    SharedPreferences SharedPrefs;
+
+    TextView txtFavGame;
+    EditText FavGameInput;
+    Button button;
+
 
 
 
@@ -33,32 +38,40 @@ public class SavedPrefs extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView (R.layout.savedprefs);
 
-        txtUserName = (TextView)  findViewById (R.id.txtUser);
-        txtEmail = (TextView)findViewById (R.id.txtEmail);
+        txtFavGame = (TextView)  findViewById (R.id.txtFavGame);
+        FavGameInput = (EditText) findViewById (R.id.FavGameInput);
+        button = (Button) findViewById(R.id.button8);
+        button.setOnClickListener(this);
 
-
-
-        SharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         loadSavedPreferences();
-        Log.e("n", "Message");
+
     }
 
     private void loadSavedPreferences(){
-        txtUserName.setText(txtUserName.getText() + SharedPref.getString("Username","Guest"));
-        txtEmail.setText(txtEmail.getText() + SharedPref.getString("Email","Null"));
 
+
+        String name = SharedPrefs.getString("StoredName"," ");
+        FavGameInput.setText(name);
+        txtFavGame.setText(txtFavGame.getText() + SharedPrefs.getString("FavGame: ", name));
 
     }
 
 
+
     public void onClick(View view){
+        SavedPreferences savedprefs = new SavedPreferences(SharedPrefs);
+        savedprefs.savePreferences("StoredName", FavGameInput.getText().toString());
+
+
+        txtFavGame.setText(FavGameInput.getText());
         setResult(Activity.RESULT_OK);
         finish();
+
 
     }
 
     public void GoToMain (View view){
-
         Intent main = new Intent(this, MainActivity.class);
         this.startActivity(main);
     }

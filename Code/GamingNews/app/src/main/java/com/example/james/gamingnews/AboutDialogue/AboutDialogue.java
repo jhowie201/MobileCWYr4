@@ -18,7 +18,7 @@ public class AboutDialogue extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         AlertDialog.Builder mcAboutDialog = new AlertDialog.Builder(getActivity());
-        mcAboutDialog.setMessage("Gaming Reviews")
+        mcAboutDialog.setMessage("Gaming News Application - Parsing Data from GameSpot.com")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
