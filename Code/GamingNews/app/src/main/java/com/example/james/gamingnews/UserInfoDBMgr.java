@@ -50,8 +50,13 @@ public class UserInfoDBMgr extends SQLiteOpenHelper {
                     + " TEXT NOT NULL," + COL_LASTNAME + " TEXT NOT NULL," + COL_EMAIL + " TEXT NOT NULL,"
                     + COL_PASSWORD + " TEXT," + COL_USERNAME + " TEXT NOT NULL" + ")";
             db.execSQL(CREATE_LOGININFORMATION_TABLE);
+        Log.e("DB Create","LoginInformation Created");
+        String InsertData = "INSERT INTO LoginInformation VALUES(1,'James','Howie','JamesHowie@hotmail.com','pass','Jhowie201')";
+         db.execSQL(InsertData);
+        Log.e("DB Create","Data Inserted Into Database");
 
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -166,7 +171,7 @@ public class UserInfoDBMgr extends SQLiteOpenHelper {
     }
 
     public UserInfo findUserInfo(String VerifyUser) {
-        String query = "Select * FROM " + TBL_LOGININFORMATION + " WHERE " + COL_FIRSTNAME + " =  \"" + VerifyUser + "\"";
+        String query = "Select * FROM " + TBL_LOGININFORMATION + " WHERE " + COL_USERNAME + " =  \"" + VerifyUser + "\"";
 
         SQLiteDatabase db = this.getReadableDatabase();
 

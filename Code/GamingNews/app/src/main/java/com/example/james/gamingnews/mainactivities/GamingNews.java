@@ -1,11 +1,9 @@
 package com.example.james.gamingnews.mainactivities;
 
-import android.app.Activity;
+
 import android.app.DialogFragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
@@ -25,20 +23,12 @@ import android.widget.Toast;
 import com.example.james.gamingnews.AboutDialogue.AboutDialogue;
 import com.example.james.gamingnews.CircDrawing;
 import com.example.james.gamingnews.Data.RSSDataItem;
-import com.example.james.gamingnews.Data.RSSHandler;
 import com.example.james.gamingnews.Data.RSSReader;
 import com.example.james.gamingnews.Listeners.ListenerGN;
 import com.example.james.gamingnews.Login.LoginScreen;
 import com.example.james.gamingnews.R;
 import com.example.james.gamingnews.UserPreferences.SavedPrefs;
 
-import org.xml.sax.InputSource;
-import org.xml.sax.XMLReader;
-
-import java.net.URL;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 /**
  * Created by James on 13/12/2014.
@@ -61,25 +51,20 @@ public class GamingNews extends ActionBarActivity {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-
         refresh = (Button) findViewById(R.id.refresh);
         refresh.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                Context context = getApplicationContext();
-                CharSequence text = "Updating RSS FEED....";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
                 try {
                     RSSFeed();
-                    toast.show();
+                    Toast.makeText(getApplicationContext(), "RSS Feed Has Been Updated",
+                            Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
          });}
+
     public void RSSFeed() throws Exception{
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -145,9 +130,7 @@ public class GamingNews extends ActionBarActivity {
             case R.id.Saved:
                 Intent intent2 = new Intent(this, SavedPrefs.class);
                 this.startActivity(intent2);
-                // setContentView(R.layout.savedprefs);
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }

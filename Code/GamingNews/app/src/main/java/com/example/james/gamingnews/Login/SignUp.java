@@ -73,12 +73,12 @@ public class SignUp extends ActionBarActivity {
     }
 
     public void lookupUser (View view) {
-        UserInfoDBMgr dbHandler = new UserInfoDBMgr(this, null, null, 1);
+        UserInfoDBMgr UIDBMgr = new UserInfoDBMgr(this, null, null, 1);
 
-        UserInfo DBUsersetget = dbHandler.findUserInfo(VerifyUser.getText().toString());
+        UserInfo userinfo = UIDBMgr.findUserInfo(VerifyUser.getText().toString());
 
-        if (DBUsersetget != null) {
-            DBUserName.setText(String.valueOf(DBUsersetget.getUserName()));
+        if (userinfo != null) {
+            DBUserName.setText(String.valueOf(userinfo.toString()));
             Toast.makeText(getApplicationContext(), "Found User!",
                     Toast.LENGTH_LONG).show();
         } else {

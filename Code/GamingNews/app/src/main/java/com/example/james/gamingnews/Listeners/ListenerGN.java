@@ -2,21 +2,14 @@ package com.example.james.gamingnews.Listeners;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.view.LayoutInflater;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.TextView;
-
 import com.example.james.gamingnews.Data.RSSDataItem;
 import com.example.james.gamingnews.R;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,73 +27,43 @@ public class ListenerGN implements AdapterView.OnItemClickListener {
         activity = anActivity;
     }
 
+    public String removeAllHtmlTags(String inStr) {
+        int index=0;
+        int index2=0;
+        while(index!=-1)
+        {
+            index = inStr.indexOf("<");
+            index2 = inStr.indexOf(">", index);
+            if(index!=-1 && index2!=-1){
+                inStr = inStr.substring(0, index).concat(inStr.substring(index2+1, inStr.length()));
+            }
+        }
+        return inStr;
+    }
 
     @SuppressLint("SimpleDateFormat")
     public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
         String show;
         String disTag;
-      //  String titletag;
+
         RSSDataItem item = listItems.get(pos);
 
         disTag = item.getItemDesc();
-      //  titletag = item.getItemTitle();
 
-        disTag = removeBr(disTag);
-        disTag = removeBr2(disTag);
-        disTag = removeBr3(disTag);
-        disTag = removeP(disTag);
-        disTag = removeP2(disTag);
-        disTag = removeP3(disTag);
-        disTag = removeP4(disTag);
-        disTag = removeEx(disTag);
-
+        disTag = removeAllHtmlTags(disTag);
 
         final Dialog d = new Dialog(activity);
-
         d.setContentView(R.layout.dialog);
         TextView tv = new TextView(activity);
-
-
+        tv.setMovementMethod(new ScrollingMovementMethod());
         show =  disTag.substring(disTag.lastIndexOf("00:00") + 5);
-
-
         tv.setText(show);
-
         d.getWindow().setLayout(1000, 1800);
         d.addContentView(tv, new ViewGroup.LayoutParams(-1, -1));
-
         d.setTitle("Additional Information");
-
-        d.show();
+         d.show();
     }
 
-
-    private String removeBr(String str1){
-        return str1.replaceAll("<br />", " ");
-    }
-
-    private String removeBr3(String str1){
-        return str1.replaceAll("<br/>", " ");
-    }
-    private String removeBr2(String str1){
-        return str1.replaceAll(">br/<", " ");
-    }
-    private String removeP(String str1){
-        return str1.replaceAll(">/p<", "");
-
-    }
-    private String removeP2(String str1){
-        return str1.replaceAll(">p<", "");
-    }
-    private String removeP3(String str1){
-        return str1.replaceAll("</p><p>&nbsp;</p>", "");
-    }
-    private String removeP4(String str1){
-        return str1.replaceAll("<p>", "");
-    }
-    private String removeEx(String str1){
-        return str1.replaceAll("nbsp;&", "");
-    }
 }
 
 

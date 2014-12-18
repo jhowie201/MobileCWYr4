@@ -87,7 +87,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.Saved:
                 Intent intent2 = new Intent(this, SavedPrefs.class);
                 this.startActivity(intent2);
-               // setContentView(R.layout.savedprefs);
+
                 return true;
 
             default:

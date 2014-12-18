@@ -15,9 +15,10 @@ public class RSSHandler extends DefaultHandler {
     private List<RSSDataItem> RssItems;
     private RSSDataItem currentItem;
     private boolean parsingTitle;
-    //private boolean parsingLink;
-   //private boolean parsingDate;
     private boolean parsingDescription;
+    String strTitle;
+
+
 
     public RSSHandler(){
         RssItems = new ArrayList <>();
@@ -30,19 +31,14 @@ public class RSSHandler extends DefaultHandler {
     @Override
     public void startElement(String uri,String localName, String qName, Attributes attributes) throws SAXException {
 
-        if (localName.equals("item")) {
+        if ("item".equals(qName)) {
             currentItem = new RSSDataItem();
         }
-        if (localName.equals("title")) {
-
+        if ("title".equals(qName))
+         {
             parsingTitle = true;
         }
-       // if (localName.equals("link")) {
-          //  parsingLink = true;
-       // }
-      //  if (localName.equals("date")) {
-         //   parsingDate = true;
-       // }
+
         if(localName.equals("description")) {
 
             parsingDescription = true;
@@ -57,21 +53,16 @@ public class RSSHandler extends DefaultHandler {
             throw new SAXException();
         }
 
-        if (localName.equals("item")) {
+        if ("item".equals(qName)) {
             RssItems.add(currentItem);
-            //currentItem = null;
+            currentItem = null;
         }
 
-        if (localName.equals("title")) {
+        if ("title".equals(qName)) {
             parsingTitle = false;
+            strTitle = "";
         }
 
-      //  if (localName.equals("link")) {
-      //      parsingLink = false;
-     //   }
-     //   if (localName.equals("date")) {
-          //  parsingDate= false;
-      //  }
         if(localName.equals("description")) {
             parsingDescription = false;
 
@@ -81,16 +72,12 @@ public class RSSHandler extends DefaultHandler {
     }
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
-        if(currentItem != null) {
-            if(parsingTitle) {
-                currentItem.setItemTitle (new String(ch, start, length));
+
+   if (currentItem != null){
+        if (parsingTitle) {
+                strTitle = strTitle + new String(ch, start, length);
+                currentItem.setItemTitle(strTitle);
             }
-          //  if(parsingDate) {
-             //   currentItem.setItemDate(new String(ch,start,length));
-          //  }
-            //if(parsingLink) {
-           //     currentItem.setItemLink(new String(ch,start,length));
-          //  }
             if(parsingDescription) {
                 String sItemDesc = new String(ch, start, length);
                 if(currentItem.getItemDesc() != null) {

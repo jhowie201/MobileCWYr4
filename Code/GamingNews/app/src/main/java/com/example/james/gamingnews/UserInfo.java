@@ -30,23 +30,23 @@ import java.io.Serializable;
            // *********************************************
 
 
-             public int getUserID() {
+       public int getUserID() {
          return UserID;
          }
 
-             public void setUserID(int UserID) {
+       public void setUserID(int UserID) {
          this.UserID = UserID;
          }
 
-             public String getFirstName() {
+       public String getFirstName() {
         return FirstName;
          }
 
-             public void setFirstName(String FirstName) {
+       public void setFirstName(String FirstName) {
          this.FirstName = FirstName;
          }
 
-             public String getLastName() {
+       public String getLastName() {
            return LastName;
        }
 
@@ -64,11 +64,11 @@ import java.io.Serializable;
             return Email;
             }
 
-                public void setEmail(String Email) {
+       public void setEmail(String Email) {
             this.Email = Email;
             }
        public String getUserName() {
-           return Email;
+           return UserName;
        }
 
        public void setUserName(String UserName) {
@@ -81,12 +81,9 @@ import java.io.Serializable;
        @Override
         public String toString() {
            String UserData;
-            UserData = "UserInfo [UserID=" +UserID;
-             UserData = ", FirstName= " + FirstName;
-             UserData = ", LastName= " + LastName;
-             UserData = ", Password= " + Password;
-             UserData = ", Email= " + Email;
 
+           UserData = "User's Full Name: " + FirstName + " " + LastName + "\n" +
+           "User's Email Address: " + Email + "\n" + "And Users ID is: " + UserID;
 
             return UserData;
             }

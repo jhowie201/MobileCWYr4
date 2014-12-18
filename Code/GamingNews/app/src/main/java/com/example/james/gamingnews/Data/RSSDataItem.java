@@ -13,7 +13,6 @@ public class RSSDataItem {
 
     private String itemTitle;
     private String itemDesc;
-    private String itemLink;
 
     // *********************************************
     // Declare getters and setters etc.
@@ -35,13 +34,6 @@ public class RSSDataItem {
         this.itemDesc = sItemDesc;
     }
 
-    public String getItemLink() {
-        return this.itemLink;
-    }
-
-    public void setItemLink(String sItemLink) {
-        this.itemLink = sItemLink;
-    }
 
  // **************************************************
  // Declare constructor.                            **
@@ -51,15 +43,13 @@ public class RSSDataItem {
     {
         this.itemTitle = "";
         this.itemDesc = "";
-        this.itemLink = "";
+
     }
 
     @Override
     public String toString() {
         String GamingNewsRSSData;
         GamingNewsRSSData =  itemTitle;
-       // GamingNewsRSSData = ", itemDesc=" +itemDesc;
-       // GamingNewsRSSData = ", itemLink=" +itemLink +"]";
         return GamingNewsRSSData;
     }
 
