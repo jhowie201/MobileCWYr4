@@ -1,4 +1,4 @@
-package com.example.james.gamingnews;
+package com.example.james.gamingnews.DataBase;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,53 +12,58 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by rla on 0/10/2014.
+ * Created by rla on 10/10/2014.
  */
-public class MapDataDBMgr extends SQLiteOpenHelper {
+public class UserInfoDBMgr extends SQLiteOpenHelper {
 
     private static final int DB_VER = 1;
-    private static final String DB_PATH = "/data/data/com.example.james.gamingnews/databases/";
-    private static final String DB_NAME = "mapEKFamous5.s3db";
-    private static final String TBL_MAPEKFAME = "mapEKFame5";
+    private static final String DB_PATH = "/data/data/com.example.james.gamingnews.app/databases/";
+    private static final String DB_NAME = "UserDetails.s3db";
+    private static final String TBL_LOGININFORMATION = "LoginInformation";
 
-    public static final String COL_ENTRYID = "entryID";
-    public static final String COL_SURNAME = "Surname";
+    public static final String COL_USERID = "UserID";
     public static final String COL_FIRSTNAME = "FirstName";
-    public static final String COL_STARSIGN = "StarSign";
-    public static final String COL_OCCUPATION = "Occupation";
-    public static final String COL_LATITUDE = "Latitude";
-    public static final String COL_LONGITUDE = "Longitude";
+    public static final String COL_LASTNAME = "LastName";
+    public static final String COL_PASSWORD = "Password";
+    public static final String COL_USERNAME = "UserName";
+    public static final String COL_EMAIL = "Email";
+
 
     private final Context appContext;
 
-    public MapDataDBMgr(Context context, String name,
-                          SQLiteDatabase.CursorFactory factory, int version) {
+    public UserInfoDBMgr(Context context, String name,
+                         SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
         this.appContext = context;
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String CREATE_MAPEKFAME_TABLE = "CREATE TABLE IF NOT EXISTS " +
-                TBL_MAPEKFAME + "("
-                + COL_ENTRYID + " INTEGER PRIMARY KEY," + COL_SURNAME
-                + " TEXT," + COL_FIRSTNAME + " TEXT," + COL_STARSIGN + " TEXT,"
-                + COL_OCCUPATION + " TEXT" + COL_LATITUDE + " FLOAT" + COL_LONGITUDE + " FLOAT" +")";
-        db.execSQL(CREATE_MAPEKFAME_TABLE);
+            String CREATE_LOGININFORMATION_TABLE = "CREATE TABLE IF NOT EXISTS " +
+                    TBL_LOGININFORMATION + "("
+                    + COL_USERID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_FIRSTNAME
+                    + " TEXT NOT NULL," + COL_LASTNAME + " TEXT NOT NULL," + COL_EMAIL + " TEXT NOT NULL,"
+                    + COL_PASSWORD + " TEXT," + COL_USERNAME + " TEXT NOT NULL" + ")";
+            db.execSQL(CREATE_LOGININFORMATION_TABLE);
+        Log.e("DB Create","LoginInformation Created");
+
+        String InsertData = "INSERT INTO LoginInformation VALUES(1,'James','Howie','JamesHowie@hotmail.com','pass','Jhowie201')";
+        db.execSQL(InsertData);
+        Log.e("DB Create","Default Data Inserted Into Database");
 
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if(newVersion > oldVersion)
         {
-            db.execSQL("DROP TABLE IF EXISTS " + TBL_MAPEKFAME);
+            db.execSQL("DROP TABLE IF EXISTS " + TBL_LOGININFORMATION);
             onCreate(db);
         }
     }
@@ -117,6 +122,8 @@ public class MapDataDBMgr extends SQLiteOpenHelper {
         return db != null ? true : false;
     }
 
+
+
     // ============================================================================================
     // Copies your database from your local assets-folder to the just created empty database in the
     // system folder, from where it can be accessed and handled.
@@ -150,97 +157,68 @@ public class MapDataDBMgr extends SQLiteOpenHelper {
     }
 
 
-    public void addaMapEKFameEntry(MapData aMapEKFame) {
+    public void addUserInfo(UserInfo aUserInfo) {
 
         ContentValues values = new ContentValues();
-        values.put(COL_SURNAME, aMapEKFame.getSurname());
-        values.put(COL_FIRSTNAME, aMapEKFame.getFirstname());
-        values.put(COL_STARSIGN, aMapEKFame.getStarSign());
-        values.put(COL_OCCUPATION, aMapEKFame.getOccupation());
-        values.put(COL_LATITUDE, aMapEKFame.getLatitude());
-        values.put(COL_LONGITUDE, aMapEKFame.getLongitude());
+        values.put(COL_FIRSTNAME, aUserInfo.getFirstName());
+        values.put(COL_LASTNAME, aUserInfo.getLastName());
+        values.put(COL_EMAIL, aUserInfo.getEmail());
+        values.put(COL_PASSWORD, aUserInfo.getPassword());
+        values.put(COL_USERNAME, aUserInfo.getUserName());
+
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.insert(TBL_MAPEKFAME, null, values);
+        db.insert(TBL_LOGININFORMATION, null, values);
         db.close();
     }
 
-    public MapData getMapEKFameEntry(String aMapEKFameEntry) {
-        String query = "Select * FROM " + TBL_MAPEKFAME + " WHERE " + COL_SURNAME + " =  \"" + aMapEKFameEntry + "\"";
+    public UserInfo findUserInfo(String VerifyUser) {
+        String query = "Select * FROM " + TBL_LOGININFORMATION + " WHERE " + COL_USERNAME + " =  \"" + VerifyUser + "\"";
 
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(query, null);
 
-        MapData MapDataEntry = new MapData();
+        UserInfo UserInfo = new UserInfo();
 
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
-            MapDataEntry.setEntryID(Integer.parseInt(cursor.getString(0)));
-            MapDataEntry.setSurname(cursor.getString(1));
-            MapDataEntry.setFirstname(cursor.getString(2));
-            MapDataEntry.setStarSign(cursor.getString(3));
-            MapDataEntry.setOccupation(cursor.getString(4));
-            MapDataEntry.setLatitude(Float.parseFloat(cursor.getString(5)));
-            MapDataEntry.setLatitude(Float.parseFloat(cursor.getString(6)));
+            UserInfo.setUserID(Integer.parseInt(cursor.getString(0)));
+            UserInfo.setFirstName(cursor.getString(1));
+            UserInfo.setLastName(cursor.getString(2));
+            UserInfo.setEmail(cursor.getString(3));
+            UserInfo.setPassword(cursor.getString(4));
+            UserInfo.setUserName(cursor.getString(5));
+
             cursor.close();
         } else {
-            MapDataEntry = null;
+            UserInfo = null;
         }
         db.close();
-        return MapDataEntry;
+        return UserInfo;
     }
 
-    public boolean removeaMapEKFameEntry(String aMapEKFameEntry) {
+    public boolean removeUserInfo(String sUserInfo) {
 
         boolean result = false;
 
-        String query = "Select * FROM " + TBL_MAPEKFAME + " WHERE " + COL_SURNAME + " =  \"" + aMapEKFameEntry + "\"";
+        String query = "Select * FROM " + TBL_LOGININFORMATION + " WHERE " + COL_FIRSTNAME + " =  \"" + sUserInfo + "\"";
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery(query, null);
 
-      //  mcStarSignsInfo StarSignsInfo = new mcStarSignsInfo();
+        UserInfo StarSignsInfo = new UserInfo();
 
         if (cursor.moveToFirst()) {
-           // StarSignsInfo.setStarSignID(Integer.parseInt(cursor.getString(0)));
-          //  db.delete(TBL_MAPEKFAME, COL_ENTRYID + " = ?",
-                  //  new String[] { String.valueOf(StarSignsInfo.getStarSignID()) });
+            StarSignsInfo.setUserID(Integer.parseInt(cursor.getString(0)));
+            db.delete(TBL_LOGININFORMATION, COL_USERID + " = ?",
+                    new String[] { String.valueOf(StarSignsInfo.getUserID()) });
             cursor.close();
             result = true;
         }
         db.close();
         return result;
-    }
-
-    public List<MapData> allMapData()
-    {
-        String query = "Select * FROM " + TBL_MAPEKFAME;
-        List<MapData> mcMapDataList = new ArrayList<MapData>();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(query, null);
-
-        if (cursor.moveToFirst()) {
-            while (cursor.isAfterLast()==false) {
-                MapData MapDataEntry = new MapData();
-                MapDataEntry.setEntryID(Integer.parseInt(cursor.getString(0)));
-                MapDataEntry.setSurname(cursor.getString(1));
-                MapDataEntry.setFirstname(cursor.getString(2));
-                MapDataEntry.setStarSign(cursor.getString(3));
-                MapDataEntry.setOccupation(cursor.getString(4));
-                MapDataEntry.setLatitude(Float.parseFloat(cursor.getString(5)));
-                MapDataEntry.setLongitude(Float.parseFloat(cursor.getString(6)));
-                mcMapDataList.add(MapDataEntry);
-                cursor.moveToNext();
-            }
-        } else {
-            mcMapDataList.add(null);
-        }
-        db.close();
-        return mcMapDataList;
     }
 }

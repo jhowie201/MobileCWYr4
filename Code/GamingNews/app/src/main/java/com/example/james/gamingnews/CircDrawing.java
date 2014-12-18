@@ -3,6 +3,8 @@ package com.example.james.gamingnews;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.example.james.gamingnews.Canvas.DrawingView;
+
 
 /**
  * Created by James on 16/12/2014.

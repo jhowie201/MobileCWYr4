@@ -52,9 +52,11 @@ public class GamingNews extends ActionBarActivity {
             e1.printStackTrace();
         }
         refresh = (Button) findViewById(R.id.refresh);
+
         refresh.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
+
                     RSSFeed();
                     Toast.makeText(getApplicationContext(), "RSS Feed Has Been Updated",
                             Toast.LENGTH_LONG).show();

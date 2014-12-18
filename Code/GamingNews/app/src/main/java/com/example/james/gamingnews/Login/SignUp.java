@@ -1,19 +1,20 @@
 package com.example.james.gamingnews.Login;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.james.gamingnews.DBHandler;
-import com.example.james.gamingnews.DBUserSETGET;
 import com.example.james.gamingnews.R;
-import com.example.james.gamingnews.UserInfo;
-import com.example.james.gamingnews.UserInfoDBMgr;
+import com.example.james.gamingnews.DataBase.UserInfo;
+import com.example.james.gamingnews.DataBase.UserInfoDBMgr;
+
+import java.io.IOException;
 
 /**
  * Created by James on 16/12/2014.
@@ -26,15 +27,15 @@ public class SignUp extends ActionBarActivity {
     EditText EmailInput;
     EditText PasswordInput;
     EditText UsernameInput;
-    DBUserSETGET userDBUserSETGET;
+
     int UserID;
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
-
-        userDBUserSETGET = new DBUserSETGET();
-
+        //UserInfoDBMgr UIDBMgr = new UserInfoDBMgr(this, null, null, 1);
 
         DBUserName = (TextView) findViewById(R.id.textView3);
         VerifyUser = (EditText) findViewById(R.id.editText);
@@ -47,9 +48,10 @@ public class SignUp extends ActionBarActivity {
     }
 
 
-    public void SignUp (View view) {
-        UserInfoDBMgr dbHandler = new UserInfoDBMgr(this, null, null, 1);
-
+    public void addUserInfo (View view) {
+        final MediaPlayer mpButtonClick = MediaPlayer.create(this,R.raw.button_click);
+        mpButtonClick.start();
+        UserInfoDBMgr UIDBMgr = new UserInfoDBMgr(this, null, null, 1);
 
 
         String FirstName = FirstnameInput.getText().toString();
@@ -57,22 +59,27 @@ public class SignUp extends ActionBarActivity {
         String Email = EmailInput.getText().toString();
         String Password = PasswordInput.getText().toString();
         String UserName = UsernameInput.getText().toString();
+        Log.e("Sign Up","Gets New Data from User");
 
-        UserInfo userinfo = new UserInfo();
+        UserInfo userinfo = new UserInfo(UserID,FirstName,LastName,Email,Password,UserName);
 
-        dbHandler.addUserInfo(userinfo);
+        UIDBMgr.addUserInfo(userinfo);
+        Log.e("Sign Up","Adds New Data");
 
         FirstnameInput.setText("");
         LastnameInput.setText("");
         EmailInput.setText("");
         PasswordInput.setText("");// Once Input, Fields display Blank
         UsernameInput.setText("");
-
+        Log.e("Sign Up", "Reset Fields to Blank");
         Toast.makeText(getApplicationContext(), "You Have Signed Up!",
                 Toast.LENGTH_LONG).show();
+        Log.e("Sign Up","Display Toast Messages");
     }
 
-    public void lookupUser (View view) {
+    public void findUserInfo (View view) {
+        final MediaPlayer mpButtonClick = MediaPlayer.create(this,R.raw.button_click);
+        mpButtonClick.start();
         UserInfoDBMgr UIDBMgr = new UserInfoDBMgr(this, null, null, 1);
 
         UserInfo userinfo = UIDBMgr.findUserInfo(VerifyUser.getText().toString());
@@ -88,7 +95,8 @@ public class SignUp extends ActionBarActivity {
         }
     }
     public void returnToLogIn (View view){
-
+        final MediaPlayer mpButtonClick = MediaPlayer.create(this,R.raw.button_click);
+        mpButtonClick.start();
         Intent LI = new Intent(this, LoginScreen.class);
         this.startActivity(LI);
     }

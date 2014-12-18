@@ -1,4 +1,4 @@
-package com.example.james.gamingnews;
+package com.example.james.gamingnews.Canvas;
 
 import android.content.Context;
 import android.graphics.Canvas;

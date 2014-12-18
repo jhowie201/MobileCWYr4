@@ -44,15 +44,15 @@
             android:name=".mainactivities.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".mainactivities.AppMaps"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".Login.LoginScreen"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden"/>
-        <activity
-            android:name=".DatabaseActivity"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden"/>/>
         <activity
             android:name=".CircDrawing"
             android:label="@string/app_name"

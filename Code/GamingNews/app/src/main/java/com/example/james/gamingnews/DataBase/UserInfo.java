@@ -1,14 +1,10 @@
-package com.example.james.gamingnews;
+package com.example.james.gamingnews.DataBase;
 
 /**
  * Created by James on 15/12/2014.
  */
 
-import java.io.Serializable;
-
-
-
-   public class UserInfo implements Serializable {
+   public class UserInfo{
 
              // *********************************************
              // Declare variables etc.
@@ -21,14 +17,22 @@ import java.io.Serializable;
     private String Password;
     private String UserName;
 
+    public UserInfo(){
 
+    }
+    public UserInfo(int UserID, String FirstName, String LastName, String Email, String Password, String UserName) {
+        this.UserID = UserID;
+        this.FirstName = FirstName;
+        this.LastName = LastName;
+        this.Email = Email;
+        this.Password = Password;
+        this.UserName = UserName;
 
-           private static final long serialVersionUID = 0L;
-
+    }
+       //    private static final long serialVersionUID = 0L;
              // *********************************************
              // Declare getters and setters etc.
            // *********************************************
-
 
        public int getUserID() {
          return UserID;
