@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.example.james.gamingnews.Data.RSSDataItem;
 import com.example.james.gamingnews.R;
 import java.util.List;
-
+//JAMES HOWIE S1310206 MUC GamingNews Application!
 /**
  * Created by James on 14/12/2014.
  */
@@ -27,22 +27,24 @@ public class ListenerGN implements AdapterView.OnItemClickListener {
         activity = anActivity;
     }
 
-    public String removeAllHtmlTags(String inStr) {
-        int index=0;
-        int index2=0;
-        while(index!=-1)
+    public String removeAllHtmlTags(String inStr) { //Used to Remove all HTML Tags from the Dialog Box
+        //Removes Instances of < > Tags
+        int ind=0;
+        int ind2=0;
+        while(ind!=-1)
         {
-            index = inStr.indexOf("<");
-            index2 = inStr.indexOf(">", index);
-            if(index!=-1 && index2!=-1){
-                inStr = inStr.substring(0, index).concat(inStr.substring(index2+1, inStr.length()));
+            ind = inStr.indexOf("<");
+            ind2 = inStr.indexOf(">", ind);
+            if(ind!=-1 && ind2!=-1){
+                inStr = inStr.substring(0, ind).concat(inStr.substring(ind2+1, inStr.length()));
             }
         }
         return inStr;
     }
 
-    @SuppressLint("SimpleDateFormat")
-    public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+
+
+    public void onItemClick(AdapterView<?> parent, View view, int pos, long id) { //Used to Display Dialog Box when ListView Item is Clicked
         String show;
         String disTag;
 
@@ -50,18 +52,18 @@ public class ListenerGN implements AdapterView.OnItemClickListener {
 
         disTag = item.getItemDesc();
 
-        disTag = removeAllHtmlTags(disTag);
+        disTag = removeAllHtmlTags(disTag); //Runs DisTag Through HTML TAG REMOVAL METHOD
 
         final Dialog d = new Dialog(activity);
-        d.setContentView(R.layout.dialog);
+        d.setContentView(R.layout.dialog);//Sets Content View of Custom Dialog Box
         TextView tv = new TextView(activity);
-        tv.setMovementMethod(new ScrollingMovementMethod());
+        tv.setMovementMethod(new ScrollingMovementMethod()); //Allows Scrolling
         show =  disTag.substring(disTag.lastIndexOf("00:00") + 5);
         tv.setText(show);
-        d.getWindow().setLayout(1000, 1800);
+        d.getWindow().setLayout(1000, 1800); //Parameters of Dialog Box
         d.addContentView(tv, new ViewGroup.LayoutParams(-1, -1));
-        d.setTitle("Additional Information");
-         d.show();
+        d.setTitle("Additional Information"); //Title of Dialog Box
+         d.show(); //Shows Dialog Box
     }
 
 }

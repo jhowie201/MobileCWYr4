@@ -28,8 +28,6 @@ import com.example.james.gamingnews.Listeners.ListenerGN;
 import com.example.james.gamingnews.Login.LoginScreen;
 import com.example.james.gamingnews.R;
 import com.example.james.gamingnews.UserPreferences.SavedPrefs;
-
-
 /**
  * Created by James on 13/12/2014.
  */
@@ -51,14 +49,14 @@ public class GamingNews extends ActionBarActivity {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-        refresh = (Button) findViewById(R.id.refresh);
+        refresh = (Button) findViewById(R.id.refresh); //Refreshes RSS Feed
 
         refresh.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
 
                     RSSFeed();
-                    Toast.makeText(getApplicationContext(), "RSS Feed Has Been Updated",
+                    Toast.makeText(getApplicationContext(), "RSS Feed Has Been Updated", //Gives Feedback on Refresh
                             Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
@@ -67,23 +65,23 @@ public class GamingNews extends ActionBarActivity {
             }
          });}
 
-    public void RSSFeed() throws Exception{
+    public void RSSFeed() throws Exception{ //Gets RSS FEED Data
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        RSSReader Rssreader = new RSSReader ("http://www.gamespot.com/feeds/news/");
+        RSSReader Rssreader = new RSSReader ("http://www.gamespot.com/feeds/news/"); //RSS FEED BEING PARSED
         ListView Item = (ListView)findViewById(R.id.listView3);
         final ArrayAdapter <RSSDataItem> adapter = new ArrayAdapter <> (this,R.layout.custom_list_item, Rssreader.getItems());
         Item.setAdapter(adapter);
         Item.setOnItemClickListener(new ListenerGN(Rssreader.getItems(), this));
-        count =	Item.getCount();
+        count =	Item.getCount(); //COUNTS ITEMS IN LISTVIEW
 
-        Log.e("n","Number of Items in RSS FEED: " + count);
+        Log.e("n","Number of Items in RSS FEED: " + count); //Logcat Items in ListView
 
 
 
-        inputSearch = (EditText) findViewById(R.id.TitleSearch);
+        inputSearch = (EditText) findViewById(R.id.TitleSearch); //Used to Filter ListView Results
         inputSearch.addTextChangedListener(new TextWatcher() {
 
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
@@ -110,7 +108,6 @@ public class GamingNews extends ActionBarActivity {
         inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -136,11 +133,7 @@ public class GamingNews extends ActionBarActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
-
-
-
-    }
+ }
 
 

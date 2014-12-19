@@ -18,32 +18,24 @@ import java.util.Locale;
  * Created by rla on 10/10/2014.
  */
 public class UserInfoDBMgr extends SQLiteOpenHelper {
-
     private static final int DB_VER = 1;
-    private static final String DB_PATH = "/data/data/com.example.james.gamingnews.app/databases/";
-    private static final String DB_NAME = "UserDetails.s3db";
-    private static final String TBL_LOGININFORMATION = "LoginInformation";
-
+    private static final String DB_PATH = "/data/data/com.example.james.gamingnews.app/databases/"; //DB Directory in mobile
+    private static final String DB_NAME = "UserDetails.s3db"; //Name Of DB
+    private static final String TBL_LOGININFORMATION = "LoginInformation"; //Tbl name
     public static final String COL_USERID = "UserID";
     public static final String COL_FIRSTNAME = "FirstName";
     public static final String COL_LASTNAME = "LastName";
     public static final String COL_PASSWORD = "Password";
     public static final String COL_USERNAME = "UserName";
     public static final String COL_EMAIL = "Email";
-
-
-    private final Context appContext;
-
+    private final Context appContext; //Get app Context
     public UserInfoDBMgr(Context context, String name,
                          SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
         this.appContext = context;
-
     }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
-
             String CREATE_LOGININFORMATION_TABLE = "CREATE TABLE IF NOT EXISTS " +
                     TBL_LOGININFORMATION + "("
                     + COL_USERID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_FIRSTNAME
@@ -51,46 +43,34 @@ public class UserInfoDBMgr extends SQLiteOpenHelper {
                     + COL_PASSWORD + " TEXT," + COL_USERNAME + " TEXT NOT NULL" + ")";
             db.execSQL(CREATE_LOGININFORMATION_TABLE);
         Log.e("DB Create","LoginInformation Created");
-
         String InsertData = "INSERT INTO LoginInformation VALUES(1,'James','Howie','JamesHowie@hotmail.com','pass','Jhowie201')";
         db.execSQL(InsertData);
         Log.e("DB Create","Default Data Inserted Into Database");
-
+//CREATE TABLE AND ISNERT QUERY
     }
-
-
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { //Used for Upgrading DB Version
         if(newVersion > oldVersion)
         {
             db.execSQL("DROP TABLE IF EXISTS " + TBL_LOGININFORMATION);
             onCreate(db);
         }
     }
-
     // ================================================================================
     // Creates a empty database on the system and rewrites it with your own database.
     // ================================================================================
     public void dbCreate() throws IOException {
-
         boolean dbExist = dbCheck();
-
         if(!dbExist){
             //By calling this method an empty database will be created into the default system path
             //of your application so we can overwrite that database with our database.
             this.getReadableDatabase();
-
             try {
-
                 copyDBFromAssets();
-
             } catch (IOException e) {
-
                 throw new Error("Error copying database");
-
             }
         }
-
     }
 
     // ============================================================================================
@@ -98,45 +78,30 @@ public class UserInfoDBMgr extends SQLiteOpenHelper {
     // @return true if it exists, false if it doesn't
     // ============================================================================================
     private boolean dbCheck(){
-
         SQLiteDatabase db = null;
-
         try{
             String dbPath = DB_PATH + DB_NAME;
             db = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READONLY);
             db.setLocale(Locale.getDefault());
             db.setVersion(1);
-
         }catch(SQLiteException e){
-
             Log.e("SQLHelper","Database not Found!");
-
         }
-
         if(db != null){
-
             db.close();
-
         }
-
         return db != null ? true : false;
     }
-
-
-
     // ============================================================================================
     // Copies your database from your local assets-folder to the just created empty database in the
     // system folder, from where it can be accessed and handled.
     // This is done by transfering bytestream.
     // ============================================================================================
     private void copyDBFromAssets() throws IOException{
-
         InputStream dbInput = null;
         OutputStream dbOutput = null;
         String dbFileName = DB_PATH + DB_NAME;
-
         try {
-
             dbInput = appContext.getAssets().open(DB_NAME);
             dbOutput = new FileOutputStream(dbFileName);
             //transfer bytes from the dbInput to the dbOutput
@@ -145,7 +110,6 @@ public class UserInfoDBMgr extends SQLiteOpenHelper {
             while ((length = dbInput.read(buffer)) > 0) {
                 dbOutput.write(buffer, 0, length);
             }
-
             //Close the streams
             dbOutput.flush();
             dbOutput.close();
@@ -156,11 +120,11 @@ public class UserInfoDBMgr extends SQLiteOpenHelper {
         }
     }
 
-
+//NOT IMPLEMENTED
     public void addUserInfo(UserInfo aUserInfo) {
 
         ContentValues values = new ContentValues();
-        values.put(COL_FIRSTNAME, aUserInfo.getFirstName());
+        values.put(COL_FIRSTNAME, aUserInfo.getFirstName()); //New Data to be Added
         values.put(COL_LASTNAME, aUserInfo.getLastName());
         values.put(COL_EMAIL, aUserInfo.getEmail());
         values.put(COL_PASSWORD, aUserInfo.getPassword());
@@ -173,15 +137,11 @@ public class UserInfoDBMgr extends SQLiteOpenHelper {
         db.close();
     }
 
-    public UserInfo findUserInfo(String VerifyUser) {
+    public UserInfo findUserInfo(String VerifyUser) { //Used to Find User Info Already in Database
         String query = "Select * FROM " + TBL_LOGININFORMATION + " WHERE " + COL_USERNAME + " =  \"" + VerifyUser + "\"";
-
         SQLiteDatabase db = this.getReadableDatabase();
-
         Cursor cursor = db.rawQuery(query, null);
-
         UserInfo UserInfo = new UserInfo();
-
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
             UserInfo.setUserID(Integer.parseInt(cursor.getString(0)));
@@ -190,7 +150,6 @@ public class UserInfoDBMgr extends SQLiteOpenHelper {
             UserInfo.setEmail(cursor.getString(3));
             UserInfo.setPassword(cursor.getString(4));
             UserInfo.setUserName(cursor.getString(5));
-
             cursor.close();
         } else {
             UserInfo = null;
@@ -198,8 +157,8 @@ public class UserInfoDBMgr extends SQLiteOpenHelper {
         db.close();
         return UserInfo;
     }
-
-    public boolean removeUserInfo(String sUserInfo) {
+//NOT IMPLEMENTED
+    public boolean removeUserInfo(String sUserInfo) { //Used to remove user from database
 
         boolean result = false;
 

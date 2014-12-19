@@ -15,7 +15,6 @@ import com.example.james.gamingnews.DataBase.UserInfo;
 import com.example.james.gamingnews.DataBase.UserInfoDBMgr;
 
 import java.io.IOException;
-
 /**
  * Created by James on 16/12/2014.
  */
@@ -27,16 +26,10 @@ public class SignUp extends ActionBarActivity {
     EditText EmailInput;
     EditText PasswordInput;
     EditText UsernameInput;
-
     int UserID;
-
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
-        //UserInfoDBMgr UIDBMgr = new UserInfoDBMgr(this, null, null, 1);
-
         DBUserName = (TextView) findViewById(R.id.textView3);
         VerifyUser = (EditText) findViewById(R.id.editText);
         FirstnameInput = (EditText) findViewById(R.id.FnameInput);
@@ -44,28 +37,20 @@ public class SignUp extends ActionBarActivity {
         EmailInput = (EditText) findViewById(R.id.EmailInput);
         PasswordInput = (EditText) findViewById(R.id.PasswordInput);
         UsernameInput = (EditText) findViewById(R.id.UsernameInput);
-
     }
-
-
     public void addUserInfo (View view) {
         final MediaPlayer mpButtonClick = MediaPlayer.create(this,R.raw.button_click);
         mpButtonClick.start();
         UserInfoDBMgr UIDBMgr = new UserInfoDBMgr(this, null, null, 1);
-
-
         String FirstName = FirstnameInput.getText().toString();
         String LastName = LastnameInput.getText().toString();
         String Email = EmailInput.getText().toString();
         String Password = PasswordInput.getText().toString();
         String UserName = UsernameInput.getText().toString();
         Log.e("Sign Up","Gets New Data from User");
-
         UserInfo userinfo = new UserInfo(UserID,FirstName,LastName,Email,Password,UserName);
-
         UIDBMgr.addUserInfo(userinfo);
         Log.e("Sign Up","Adds New Data");
-
         FirstnameInput.setText("");
         LastnameInput.setText("");
         EmailInput.setText("");
@@ -81,9 +66,7 @@ public class SignUp extends ActionBarActivity {
         final MediaPlayer mpButtonClick = MediaPlayer.create(this,R.raw.button_click);
         mpButtonClick.start();
         UserInfoDBMgr UIDBMgr = new UserInfoDBMgr(this, null, null, 1);
-
         UserInfo userinfo = UIDBMgr.findUserInfo(VerifyUser.getText().toString());
-
         if (userinfo != null) {
             DBUserName.setText(String.valueOf(userinfo.toString()));
             Toast.makeText(getApplicationContext(), "Found User!",

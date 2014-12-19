@@ -14,8 +14,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-
 import com.example.james.gamingnews.AboutDialogue.AboutDialogue;
 import com.example.james.gamingnews.CircDrawing;
 import com.example.james.gamingnews.Login.LoginScreen;
@@ -23,15 +21,16 @@ import com.example.james.gamingnews.R;
 import com.example.james.gamingnews.UserPreferences.SavedPreferences;
 import com.example.james.gamingnews.UserPreferences.SavedPrefs;
 
+//Used Import Statements
+
+//JAMES HOWIE S1310206 MUC GamingNews Application!
+
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
     SavedPreferences SDPrefs;
     SharedPreferences SharedPref;
     FragmentManager fmAboutDialogue;
-    Button buttonNews;
-
-
 
 
     @Override
@@ -39,7 +38,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPref = PreferenceManager.getDefaultSharedPreferences(this); //Allows Preferences to be Saved
         SDPrefs = new SavedPreferences(SharedPref);
         SDPrefs.setDefaultPrefs();
 
@@ -48,15 +47,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     }
 
-    public void GoToNews (View view){
-        final MediaPlayer mpButtonClick = MediaPlayer.create(this,R.raw.button_click);
+    public void GoToNews (View view){ //Once clicked starts GamingNews Activity
+        final MediaPlayer mpButtonClick = MediaPlayer.create(this,R.raw.button_click); //Plays Sounds When Clicked
                 mpButtonClick.start();
                 Intent News = new Intent(this, GamingNews.class);
                 this.startActivity(News);
             }
 
 
-    public void GoToMaps (View view){
+    public void GoToMaps (View view){//Once clicked starts AppMaps Activity
         final MediaPlayer mpButtonClick = MediaPlayer.create(this,R.raw.button_click);
         mpButtonClick.start();
         Intent Mp = new Intent(this, AppMaps.class);
